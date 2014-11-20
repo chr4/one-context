@@ -3,11 +3,11 @@
 # Author: Chris Aumann <me@chr4.org>
 # Set /etc/hostname from OpenNebula context (if given) unless hostname was already set.
 
-if [ -n "$HOSTNAME" ]; then
+if [ -n "$SET_HOSTNAME" ]; then
     # Check whether hostname is already set
     [ -s /etc/hostname ] || exit 0
 
     # Set hostname according to given context variable
-    echo $HOSTNAME > /etc/hostname
-    hostname $HOSTNAME
+    echo $SET_HOSTNAME > /etc/hostname
+    hostname $SET_HOSTNAME
 fi
