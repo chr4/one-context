@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Author: Chris Aumann <me@chr4.org>
+# Generate ssh host keys, unless they exist
+
+if [ ! -e /etc/ssh/ssh_host_ed25519_key ]; then
+    ssh-keygen -t ed25519 -N "" -f /etc/ssh/ssh_host_ed25519_key
+fi
+
+if [ ! -e /etc/ssh/ssh_host_rsa_key ]; then
+    ssh-keygen -t rsa -b 4096 -N "" -f /etc/ssh/ssh_host_rsa_key
+fi

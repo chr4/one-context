@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Author: Chris Aumann <me@chr4.org>
+# Set /etc/hostname from OpenNebula context (if given) unless hostname was already set.
+
+if [ -n "$HOSTNAME" ]; then
+    # Check whether hostname is already set
+    [ -s /etc/hostname ] || exit 0
+
+    # Set hostname according to given context variable
+    echo $HOSTNAME > /etc/hostname
+    hostname $HOSTNAME
+fi

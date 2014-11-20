@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Author: Chris Aumann <me@chr4.org>
+# Deploy ssh key from OpenNebula context to default ubuntu user
+HOMEDIR=/home/ubuntu
+
+# Exit if no public key was found in context
+[ -z "${SSH_PUBLIC_KEY}${EC2_PUBLIC_KEY}" ] && exit 0
+
+# Exit if users homedir doesn't exist
+[ ! -d $HOMEDIR ] && exit 0
+
+# Create .ssh directory and deploy key(s)
+mkdir -m 0700 -p $HOMEDIR/.ssh
+
+echo -n '' > $HOMEDIR/.ssh/authorized_keys
+
+if [ -n "$SSH_PUBLIC_KEY" ]; then
+    echo "$SSH_PUBLIC_KEY" >> $HOMEDIR/.ssh/authorized_keys
+fi
+
+if [ -n "$EC2_PUBLIC_KEY" ]; then
+    echo "$EC2_PUBLIC_KEY" >> $HOMEDIR/.ssh/authorized_keys
+fi
+
+chown -R ubuntu:ubuntu $HOMEDIR/.ssh
