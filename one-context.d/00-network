@@ -112,6 +112,14 @@ EOT
       echo "  gateway $GATEWAY"
     fi
 
+    if [ -n "$DNS" ]; then
+      echo "  dns-nameservers $DNS"
+    fi
+
+    if [ -n "$SEARCH_DOMAIN" ]; then
+      echo "  dns-search $SEARCH_DOMAIN"
+    fi
+
     echo ""
 }
 
@@ -124,6 +132,14 @@ EOT
 
     if [ -n "$GATEWAY6" ]; then
       echo "  gateway $GATEWAY6"
+    fi
+
+    if [ -n "$DNS6" ]; then
+      echo "  dns-nameservers $DNS6"
+    fi
+
+    if [ -n "$SEARCH_DOMAIN" ]; then
+      echo "  dns-search $SEARCH_DOMAIN"
     fi
 
     echo ""
@@ -168,10 +184,13 @@ EOT
 
         IP=$(get_ip)
         NETWORK=$(get_network)
+        DNS=$(get_iface_var "DNS")
+        SEARCH_DOMAIN=$(get_iface_var "SEARCH_DOMAIN")
         MASK=$(get_mask)
         GATEWAY=$(get_gateway)
 
         IPV6=$(get_iface_var "IPV6")
+        DNS6=$(get_iface_var "DNS6")
         [[ -z $IPV6 ]] && IPV6=$(get_iface_var "IP6")
         GATEWAY6=$(get_gateway6)
         CONTEXT_FORCE_IPV4=$(get_iface_var "CONTEXT_FORCE_IPV4")
