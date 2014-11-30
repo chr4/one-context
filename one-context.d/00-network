@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 # -------------------------------------------------------------------------- #
 # Copyright 2010-2014, C12G Labs S.L.                                        #
@@ -215,8 +215,10 @@ deactivate_network()
         IFACES=`/sbin/ifquery -la`
 
         for i in $IFACES; do
-            /sbin/ifdown $i
-            /sbin/ip addr flush dev $i
+			if [ ! $i = "lo" ] ; then
+				/sbin/ifdown $i
+				/sbin/ip addr flush dev $i
+			fi
         done
     else
         service networking stop
@@ -230,7 +232,9 @@ activate_network()
         IFACES=`/sbin/ifquery -la`
 
         for i in $IFACES; do
-            /sbin/ifup $i
+			if [ ! $i = "lo" ] ; then
+				/sbin/ifup $i
+			fi
         done
     else
         service networking stop
