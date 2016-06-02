@@ -11,8 +11,9 @@ original vmcontext scripts by OpenNebula.
    was bootstrapped correctly
 6. Use resolvconf attributes to set dns-nameservers and dns-search
 
-To properly run the scripts on boot time, activate them with `rc-update.d`
 
-```bash
-update-rc.d vmcontext defaults 09 99
+## Installation
+
+```shell
+make install
 ```
