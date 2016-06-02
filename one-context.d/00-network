@@ -215,10 +215,10 @@ deactivate_network()
         IFACES=`/sbin/ifquery -la`
 
         for i in $IFACES; do
-			if [ ! $i = "lo" ] ; then
-				/sbin/ifdown $i
-				/sbin/ip addr flush dev $i
-			fi
+            if [ $i != 'lo' ]; then
+                /sbin/ifdown $i
+                /sbin/ip addr flush dev $i
+            fi
         done
     else
         service networking stop
@@ -232,9 +232,9 @@ activate_network()
         IFACES=`/sbin/ifquery -la`
 
         for i in $IFACES; do
-			if [ ! $i = "lo" ] ; then
-				/sbin/ifup $i
-			fi
+            if [ ! $i = "lo" ] ; then
+                /sbin/ifup $i
+            fi
         done
     else
         service networking stop
