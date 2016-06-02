@@ -17,3 +17,7 @@ original vmcontext scripts by OpenNebula.
 ```shell
 make install
 ```
+
+## TODO
+
+Add systemd service. This is not provided by OpenNebula upstream yet, therefore skipping it for now.
